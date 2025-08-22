@@ -1,8 +1,11 @@
 name: Update README metrics
 on:
   schedule:
-    - cron: "0 */12 * * *"   # every 12 hours
+    - cron: "0 */6 * * *"   # every 12 hours
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -19,7 +22,10 @@ jobs:
           template: classic
           base: header, activity, repositories, metadata
           config_timezone: Africa/Lagos
-
+          
+          # Output settings
+          filename: metrics.svg
+          
           # Count commits attributed to you across org/private repos
           # Include your main email + GitHub noreply just in case
           commits_authoring: chidubemogbuefi@gmail.com, chidubeminfo@gmail.com, chidubem.ogbuefi@pau.edu.ng, ogbcode@users.noreply.github.com
@@ -48,11 +54,26 @@ jobs:
           plugin_organizations: yes
           # Optional: pin specific orgs, else it auto-detects
           # organizations: telefytech, your-other-org
+          
+      - name: Debug - List files
+        run: |
+          echo "Files in current directory:"
+          ls -la
+          echo "Looking for metrics files:"
+          ls -la metrics.* || echo "No metrics files found"
 
       - name: Commit metrics
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add metrics.*
-          git commit -m "chore(metrics): update README metrics" || echo "No changes to commit"
-          git push
+          
+          # Check if metrics files were generated
+          if ls metrics.* 1> /dev/null 2>&1; then
+            echo "Metrics files found, committing..."
+            git add metrics.*
+            git commit -m "chore(metrics): update README metrics" || echo "No changes to commit"
+            git push
+          else
+            echo "No metrics files generated. Check the previous step for errors."
+            exit 1
+          fi
