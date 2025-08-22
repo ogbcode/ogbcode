@@ -19,41 +19,46 @@ jobs:
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           user: ogbcode
-          template: classic
-          base: header, activity, repositories, metadata
-          config_timezone: Africa/Lagos
+          filename: github-metrics.svg
           
-          # Output settings
-          filename: metrics.svg
+          # Beautiful template configuration
+          template: classic
+          base: header, activity, community, repositories, metadata
+          config_timezone: Africa/Lagos
+          config_theme: radical
+          config_order: base.header, isocalendar, languages, notable, achievements
           
           # Count commits attributed to you across org/private repos
-          # Include your main email + GitHub noreply just in case
           commits_authoring: chidubemogbuefi@gmail.com, chidubeminfo@gmail.com, chidubem.ogbuefi@pau.edu.ng, ogbcode@users.noreply.github.com
 
           # Include repos you contribute to across orgs
           repositories_affiliations: owner, collaborator, organization_member
           repositories_forks: no
 
-          # Plugins (tweak to taste)
-          plugin_activity: yes
-          plugin_activity_limit: 7
-          plugin_activity_days: 14
-          plugin_activity_filter: issue, pr, release, push
-
+          # 🗓️ Isometric commit calendar
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
-
+          
+          # 🈷️ Languages activity
           plugin_languages: yes
-          plugin_languages_ignored: html, css
+          plugin_languages_ignored: html, css, tex
           plugin_languages_limit: 8
-
+          plugin_languages_threshold: 0%
+          plugin_languages_colors: github
+          plugin_languages_sections: most-used
+          plugin_languages_details: bytes-size, percentage
+          
+          # 🎖️ Achievements
           plugin_achievements: yes
           plugin_achievements_threshold: C
           plugin_achievements_secrets: yes
-
-          plugin_organizations: yes
-          # Optional: pin specific orgs, else it auto-detects
-          # organizations: telefytech, your-other-org
+          plugin_achievements_display: detailed
+          plugin_achievements_limit: 0
+          
+          # 📓 Notable contributions
+          plugin_notable: yes
+          plugin_notable_filter: stars:>500
+          plugin_notable_repositories: yes
           
       - name: Debug - List files
         run: |
@@ -68,9 +73,9 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
           # Check if metrics files were generated
-          if ls metrics.* 1> /dev/null 2>&1; then
+          if ls github-metrics.* 1> /dev/null 2>&1; then
             echo "Metrics files found, committing..."
-            git add metrics.*
+            git add github-metrics.*
             git commit -m "chore(metrics): update README metrics" || echo "No changes to commit"
             git push
           else
