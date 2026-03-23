@@ -99,15 +99,9 @@ I work on backend systems and blockchain infrastructure. Microservices, on-chain
 <br>
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=ogbcode&show_icons=true&theme=github_dark&hide_border=true&bg_color=0d1117&title_color=A78BFA&icon_color=A78BFA&text_color=c9d1d9&ring_color=A78BFA&include_all_commits=true&count_private=true">
-    <img height="170" src="https://github-readme-stats.vercel.app/api?username=ogbcode&show_icons=true&theme=default&hide_border=true&include_all_commits=true&count_private=true">
-  </picture>
-  &nbsp;
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-streak-stats.herokuapp.com/?user=ogbcode&theme=github-dark-blue&hide_border=true&background=0d1117&ring=A78BFA&fire=A78BFA&currStreakLabel=A78BFA">
-    <img height="170" src="https://github-readme-streak-stats.herokuapp.com/?user=ogbcode&hide_border=true">
-  </picture>
+  <a href="https://git.io/streak-stats">
+    <img src="https://github-readme-streak-stats.herokuapp.com?user=ogbcode&theme=transparent" alt="GitHub Streak" />
+  </a>
 </div>
 
 <br>
