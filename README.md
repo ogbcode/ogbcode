@@ -57,7 +57,7 @@ I work on backend systems and blockchain infrastructure. Microservices, on-chain
     </td>
   </tr>
   <tr>
-    <td><b>Chain</b></td>
+    <td><b>BlockChain</b></td>
     <td>
       <img src="https://skillicons.dev/icons?i=solidity" height="32">
       &nbsp;
